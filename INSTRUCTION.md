@@ -25,9 +25,13 @@ kubectl get pods -n todoapp
 ## 4. Test via ClusterIP (from inside the cluster)
 
 Run a temporary BusyBox pod and test the service:
+```sh
+kubectl run busybox --image=busybox -n todoapp --restart=Never -- sleep 3600
+```
+Connect to BusyBox and test the service:
 
 kubectl -n todoapp exec -it busybox -- sh
-curl http://todoapp-service.mateapp.svc.cluster.local
+curl http://todoapp-service.todoapp.svc.cluster.local
 
 
 ## 5. Test via kubectl port-forward
@@ -60,7 +64,7 @@ http://localhost:30080
 Check readiness and liveness endpoints:
 
 ```sh
-curl http://localhost:8080/api/healthy
+curl http://localhost:8080/api/health
 curl http://localhost:8080/api/ready
 ```
 
